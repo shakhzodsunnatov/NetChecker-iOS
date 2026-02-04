@@ -1,0 +1,621 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EB029422F33573900CCFFCA /* NetCheckerTraffic in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB029432F33573900CCFFCA /* NetCheckerTraffic */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EB029232F3356B800CCFFCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EB0290D2F3356B600CCFFCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EB029142F3356B600CCFFCA;
+			remoteInfo = CheckerTestApp;
+		};
+		2EB0292D2F3356B800CCFFCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EB0290D2F3356B600CCFFCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EB029142F3356B600CCFFCA;
+			remoteInfo = CheckerTestApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2EB029152F3356B600CCFFCA /* CheckerTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckerTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB029222F3356B800CCFFCA /* CheckerTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckerTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB0292C2F3356B800CCFFCA /* CheckerTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckerTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2EB029462F33580000CCFFCA /* Exceptions for "CheckerTestApp" folder in "CheckerTestApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2EB029142F3356B600CCFFCA /* CheckerTestApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2EB029172F3356B600CCFFCA /* CheckerTestApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2EB029462F33580000CCFFCA /* Exceptions for "CheckerTestApp" folder in "CheckerTestApp" target */,
+			);
+			path = CheckerTestApp;
+			sourceTree = "<group>";
+		};
+		2EB029252F3356B800CCFFCA /* CheckerTestAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CheckerTestAppTests;
+			sourceTree = "<group>";
+		};
+		2EB0292F2F3356B800CCFFCA /* CheckerTestAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CheckerTestAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EB029122F3356B600CCFFCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EB029422F33573900CCFFCA /* NetCheckerTraffic in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB0291F2F3356B800CCFFCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB029292F3356B800CCFFCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EB0290C2F3356B600CCFFCA = {
+			isa = PBXGroup;
+			children = (
+				2EB029172F3356B600CCFFCA /* CheckerTestApp */,
+				2EB029252F3356B800CCFFCA /* CheckerTestAppTests */,
+				2EB0292F2F3356B800CCFFCA /* CheckerTestAppUITests */,
+				2EB029162F3356B600CCFFCA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2EB029162F3356B600CCFFCA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EB029152F3356B600CCFFCA /* CheckerTestApp.app */,
+				2EB029222F3356B800CCFFCA /* CheckerTestAppTests.xctest */,
+				2EB0292C2F3356B800CCFFCA /* CheckerTestAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EB029142F3356B600CCFFCA /* CheckerTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EB029362F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestApp" */;
+			buildPhases = (
+				2EB029112F3356B600CCFFCA /* Sources */,
+				2EB029122F3356B600CCFFCA /* Frameworks */,
+				2EB029132F3356B600CCFFCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2EB029172F3356B600CCFFCA /* CheckerTestApp */,
+			);
+			name = CheckerTestApp;
+			packageProductDependencies = (
+				2EB029432F33573900CCFFCA /* NetCheckerTraffic */,
+			);
+			productName = CheckerTestApp;
+			productReference = 2EB029152F3356B600CCFFCA /* CheckerTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2EB029212F3356B800CCFFCA /* CheckerTestAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EB029392F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestAppTests" */;
+			buildPhases = (
+				2EB0291E2F3356B800CCFFCA /* Sources */,
+				2EB0291F2F3356B800CCFFCA /* Frameworks */,
+				2EB029202F3356B800CCFFCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EB029242F3356B800CCFFCA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2EB029252F3356B800CCFFCA /* CheckerTestAppTests */,
+			);
+			name = CheckerTestAppTests;
+			packageProductDependencies = (
+			);
+			productName = CheckerTestAppTests;
+			productReference = 2EB029222F3356B800CCFFCA /* CheckerTestAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2EB0292B2F3356B800CCFFCA /* CheckerTestAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EB0293C2F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestAppUITests" */;
+			buildPhases = (
+				2EB029282F3356B800CCFFCA /* Sources */,
+				2EB029292F3356B800CCFFCA /* Frameworks */,
+				2EB0292A2F3356B800CCFFCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EB0292E2F3356B800CCFFCA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2EB0292F2F3356B800CCFFCA /* CheckerTestAppUITests */,
+			);
+			name = CheckerTestAppUITests;
+			packageProductDependencies = (
+			);
+			productName = CheckerTestAppUITests;
+			productReference = 2EB0292C2F3356B800CCFFCA /* CheckerTestAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EB0290D2F3356B600CCFFCA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					2EB029142F3356B600CCFFCA = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					2EB029212F3356B800CCFFCA = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 2EB029142F3356B600CCFFCA;
+					};
+					2EB0292B2F3356B800CCFFCA = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 2EB029142F3356B600CCFFCA;
+					};
+				};
+			};
+			buildConfigurationList = 2EB029102F3356B600CCFFCA /* Build configuration list for PBXProject "CheckerTestApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EB0290C2F3356B600CCFFCA;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2EB0293F2F33573800CCFFCA /* XCLocalSwiftPackageReference "../NetChecker" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2EB029162F3356B600CCFFCA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EB029142F3356B600CCFFCA /* CheckerTestApp */,
+				2EB029212F3356B800CCFFCA /* CheckerTestAppTests */,
+				2EB0292B2F3356B800CCFFCA /* CheckerTestAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EB029132F3356B600CCFFCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB029202F3356B800CCFFCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB0292A2F3356B800CCFFCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EB029112F3356B600CCFFCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB0291E2F3356B800CCFFCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB029282F3356B800CCFFCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EB029242F3356B800CCFFCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EB029142F3356B600CCFFCA /* CheckerTestApp */;
+			targetProxy = 2EB029232F3356B800CCFFCA /* PBXContainerItemProxy */;
+		};
+		2EB0292E2F3356B800CCFFCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EB029142F3356B600CCFFCA /* CheckerTestApp */;
+			targetProxy = 2EB0292D2F3356B800CCFFCA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2EB029342F3356B800CCFFCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EB029352F3356B800CCFFCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EB029372F3356B800CCFFCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CheckerTestApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetChecker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2EB029382F3356B800CCFFCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CheckerTestApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetChecker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2EB0293A2F3356B800CCFFCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CheckerTestApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CheckerTestApp";
+			};
+			name = Debug;
+		};
+		2EB0293B2F3356B800CCFFCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CheckerTestApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CheckerTestApp";
+			};
+			name = Release;
+		};
+		2EB0293D2F3356B800CCFFCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CheckerTestApp;
+			};
+			name = Debug;
+		};
+		2EB0293E2F3356B800CCFFCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V6HY9M86Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huh.netcheckers.CheckerTestAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CheckerTestApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EB029102F3356B600CCFFCA /* Build configuration list for PBXProject "CheckerTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB029342F3356B800CCFFCA /* Debug */,
+				2EB029352F3356B800CCFFCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EB029362F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB029372F3356B800CCFFCA /* Debug */,
+				2EB029382F3356B800CCFFCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EB029392F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB0293A2F3356B800CCFFCA /* Debug */,
+				2EB0293B2F3356B800CCFFCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EB0293C2F3356B800CCFFCA /* Build configuration list for PBXNativeTarget "CheckerTestAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB0293D2F3356B800CCFFCA /* Debug */,
+				2EB0293E2F3356B800CCFFCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2EB0293F2F33573800CCFFCA /* XCLocalSwiftPackageReference "../NetChecker" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../NetChecker;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EB029432F33573900CCFFCA /* NetCheckerTraffic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetCheckerTraffic;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2EB0290D2F3356B600CCFFCA /* Project object */;
+}
