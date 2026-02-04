@@ -14,30 +14,266 @@ struct ContentView: View {
             // Traffic Inspector
             TrafficListView()
                 .tabItem {
-                    Label("Traffic", systemImage: "arrow.up.arrow.down.circle")
+                    Label("Traffic", systemImage: "network")
                 }
 
             // Test API Calls
             APITestView()
                 .tabItem {
-                    Label("Test API", systemImage: "network")
+                    Label("API Test", systemImage: "arrow.up.arrow.down")
                 }
+
+            // Environment Switching
+            NavigationStack {
+                EnvironmentTestView()
+            }
+            .tabItem {
+                Label("Environments", systemImage: "server.rack")
+            }
+
+            // Mock Rules
+            NavigationStack {
+                MockRulesView()
+            }
+            .tabItem {
+                Label("Mocks", systemImage: "theatermasks")
+            }
         }
         .onAppear {
             // Start traffic interception
             TrafficInterceptor.shared.start()
+
+            // Setup demo environments
+            setupDemoEnvironments()
+        }
+    }
+
+    private func setupDemoEnvironments() {
+        let store = EnvironmentStore.shared
+
+        // Only setup if no groups exist
+        guard store.groups.isEmpty else { return }
+
+        // Create JSONPlaceholder environment group
+        let jsonPlaceholderGroup = EnvironmentGroup(
+            name: "JSONPlaceholder API",
+            sourcePattern: "jsonplaceholder.typicode.com",
+            environments: [
+                Environment(
+                    name: "Production",
+                    emoji: "🟢",
+                    baseURL: URL(string: "https://jsonplaceholder.typicode.com")!,
+                    isDefault: true,
+                    variables: ["API_VERSION": "v1", "DEBUG": "false"]
+                ),
+                Environment(
+                    name: "Staging",
+                    emoji: "🟡",
+                    baseURL: URL(string: "https://jsonplaceholder.typicode.com")!,
+                    variables: ["API_VERSION": "v2-beta", "DEBUG": "true"]
+                ),
+                Environment(
+                    name: "Development",
+                    emoji: "🔧",
+                    baseURL: URL(string: "https://jsonplaceholder.typicode.com")!,
+                    variables: ["API_VERSION": "dev", "DEBUG": "true", "LOG_LEVEL": "verbose"]
+                )
+            ]
+        )
+        store.addGroup(jsonPlaceholderGroup)
+
+        // Create a mock API environment group
+        let mockAPIGroup = EnvironmentGroup(
+            name: "Mock API Server",
+            sourcePattern: "api.example.com",
+            environments: [
+                Environment(
+                    name: "Production",
+                    emoji: "🟢",
+                    baseURL: URL(string: "https://api.example.com")!,
+                    isDefault: true
+                ),
+                Environment(
+                    name: "Local",
+                    emoji: "💻",
+                    baseURL: URL(string: "http://localhost:3000")!,
+                    variables: ["LOCAL": "true"]
+                )
+            ]
+        )
+        store.addGroup(mockAPIGroup)
+    }
+}
+
+// MARK: - Environment Test View
+
+struct EnvironmentTestView: View {
+    @ObservedObject private var store = EnvironmentStore.shared
+    @State private var selectedEnvironmentInfo: String = "No environment selected"
+
+    var body: some View {
+        List {
+            // Current Environment Status
+            Section("Current Status") {
+                if let activeEnv = store.activeEnvironment {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text(activeEnv.emoji)
+                                .font(.title)
+                            Text(activeEnv.name)
+                                .font(.headline)
+                        }
+
+                        Text(activeEnv.baseURL.absoluteString)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+
+                        if !activeEnv.variables.isEmpty {
+                            Divider()
+                            ForEach(Array(activeEnv.variables.keys.sorted()), id: \.self) { key in
+                                HStack {
+                                    Text(key)
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                    Spacer()
+                                    Text(activeEnv.variables[key] ?? "")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.vertical, 4)
+                } else {
+                    Text("No active environment")
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            // Quick Override Section
+            Section("Quick Override") {
+                if let override = store.quickOverrideURL {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Active Override")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            Text(override.absoluteString)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        Button("Clear") {
+                            store.clearQuickOverride()
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.red)
+                    }
+                } else {
+                    Button {
+                        // Add a quick override to localhost
+                        store.addQuickOverride(
+                            from: "jsonplaceholder.typicode.com",
+                            to: "localhost:8080",
+                            autoDisableAfter: 300
+                        )
+                    } label: {
+                        Label("Override to localhost:8080", systemImage: "arrow.triangle.2.circlepath")
+                    }
+                }
+            }
+
+            // Environment Switcher
+            Section("Switch Environments") {
+                NavigationLink {
+                    EnvironmentSwitcherView()
+                } label: {
+                    Label("Manage Environments", systemImage: "server.rack")
+                }
+            }
+
+            // Test Environment Variables
+            Section("Test Environment Variables") {
+                Button {
+                    testEnvironmentVariable()
+                } label: {
+                    Label("Read API_VERSION Variable", systemImage: "doc.text.magnifyingglass")
+                }
+
+                Text(selectedEnvironmentInfo)
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundColor(.secondary)
+            }
+
+            // Instructions
+            Section {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("How to Test:")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+
+                    Text("1. Go to 'Manage Environments' to switch between Production/Staging/Development")
+                    Text("2. Use 'Quick Override' to redirect traffic to localhost")
+                    Text("3. Read environment variables to verify the switch")
+                    Text("4. Make API calls in 'API Test' tab to see traffic routed")
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+        }
+        .navigationTitle("Environments")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    store.resetToProduction()
+                } label: {
+                    Text("Reset")
+                }
+            }
+        }
+    }
+
+    private func testEnvironmentVariable() {
+        if let apiVersion = TrafficInterceptor.shared.variable("API_VERSION") {
+            selectedEnvironmentInfo = "API_VERSION = \(apiVersion)"
+        } else {
+            selectedEnvironmentInfo = "API_VERSION not found"
+        }
+
+        // Also show all variables
+        let allVars = EnvironmentStore.shared.allVariables()
+        if !allVars.isEmpty {
+            let varsString = allVars.map { "\($0.key): \($0.value)" }.joined(separator: "\n")
+            selectedEnvironmentInfo += "\n\nAll Variables:\n\(varsString)"
         }
     }
 }
 
 // MARK: - API Test View
+
 struct APITestView: View {
     @State private var lastResult: String = "No requests yet"
     @State private var isLoading = false
+    @ObservedObject private var store = EnvironmentStore.shared
 
     var body: some View {
         NavigationStack {
             List {
+                // Current Environment Badge
+                if let activeEnv = store.activeEnvironment {
+                    Section {
+                        HStack {
+                            Text(activeEnv.emoji)
+                            Text("Using: \(activeEnv.name)")
+                                .font(.subheadline)
+                            Spacer()
+                            Text(activeEnv.baseURL.host ?? "")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
                 // Test API Calls Section
                 Section("Make Test Requests") {
                     Button {
@@ -81,7 +317,7 @@ struct APITestView: View {
                 }
 
                 Section {
-                    Text("After making requests, switch to the Traffic tab to see them.")
+                    Text("After making requests, switch to the Traffic tab to see them. Try switching environments in the Environments tab to see how traffic is affected.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
