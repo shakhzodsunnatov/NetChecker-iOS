@@ -769,6 +769,7 @@ struct MockDemoView: View {
 
 struct BreakpointDemoView: View {
     @ObservedObject private var breakpointEngine = BreakpointEngine.shared
+    @State private var editingPausedRequest: PausedRequest?
 
     var body: some View {
         List {
@@ -827,7 +828,16 @@ struct BreakpointDemoView: View {
                                 .foregroundColor(.secondary)
                                 .lineLimit(2)
 
-                            HStack(spacing: 12) {
+                            HStack(spacing: 8) {
+                                Button {
+                                    editingPausedRequest = paused
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(.blue)
+
                                 Button {
                                     breakpointEngine.resume(id: paused.id, with: nil)
                                 } label: {
@@ -934,6 +944,11 @@ struct BreakpointDemoView: View {
             }
         }
         .navigationTitle("Breakpoints")
+        .sheet(item: $editingPausedRequest) { paused in
+            NavigationStack {
+                PausedRequestEditorView(paused: paused)
+            }
+        }
     }
 
     private func addBreakpointAll() {
