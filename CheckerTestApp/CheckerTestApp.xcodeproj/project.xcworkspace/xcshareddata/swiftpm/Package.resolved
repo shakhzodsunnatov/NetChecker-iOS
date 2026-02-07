@@ -1,0 +1,15 @@
+{
+  "originHash" : "f754404653cbb66aba3f7bb8e00446040699522a297a2905de62be96eff2892f",
+  "pins" : [
+    {
+      "identity" : "netchecker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shakhzodsunnatov/NetChecker.git",
+      "state" : {
+        "revision" : "97c892e4a370ad146a701c9bdccb1c40a1536271",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}
