@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2E47C7452F36FF0800049755 /* NetCheckerTraffic in Frameworks */ = {isa = PBXBuildFile; productRef = 2E47C7442F36FF0800049755 /* NetCheckerTraffic */; };
-		2E81EF8A2F33B2D3002461BD /* NetCheckerTraffic in Frameworks */ = {isa = PBXBuildFile; productRef = 2E81EF892F33B2D3002461BD /* NetCheckerTraffic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +70,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E47C7452F36FF0800049755 /* NetCheckerTraffic in Frameworks */,
-				2E81EF8A2F33B2D3002461BD /* NetCheckerTraffic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +130,6 @@
 			);
 			name = CheckerTestApp;
 			packageProductDependencies = (
-				2E81EF892F33B2D3002461BD /* NetCheckerTraffic */,
 				2E47C7442F36FF0800049755 /* NetCheckerTraffic */,
 			);
 			productName = CheckerTestApp;
@@ -218,7 +215,7 @@
 			mainGroup = 2EB0290C2F3356B600CCFFCA;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2E47C7432F36FF0800049755 /* XCRemoteSwiftPackageReference "NetChecker" */,
+				2E47C7432F36FF0800049755 /* XCLocalSwiftPackageReference "NetCheckerSDK" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2EB029162F3356B600CCFFCA /* Products */;
@@ -608,25 +605,17 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		2E47C7432F36FF0800049755 /* XCRemoteSwiftPackageReference "NetChecker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/shakhzodsunnatov/NetChecker.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		2E47C7432F36FF0800049755 /* XCLocalSwiftPackageReference "NetCheckerSDK" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../NetCheckerSDK;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		2E47C7442F36FF0800049755 /* NetCheckerTraffic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E47C7432F36FF0800049755 /* XCRemoteSwiftPackageReference "NetChecker" */;
-			productName = NetCheckerTraffic;
-		};
-		2E81EF892F33B2D3002461BD /* NetCheckerTraffic */ = {
-			isa = XCSwiftPackageProductDependency;
+			package = 2E47C7432F36FF0800049755 /* XCLocalSwiftPackageReference "NetCheckerSDK" */;
 			productName = NetCheckerTraffic;
 		};
 /* End XCSwiftPackageProductDependency section */

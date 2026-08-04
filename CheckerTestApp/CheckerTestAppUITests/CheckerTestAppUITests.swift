@@ -9,31 +9,84 @@ import XCTest
 
 final class CheckerTestAppUITests: XCTestCase {
 
+    private var app: XCUIApplication!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    // MARK: - Вкладки
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAllTabsAreReachable() {
+        for tab in ["Home", "API Test", "Traffic", "Mocks", "Breakpoints"] {
+            let button = app.tabBars.buttons[tab]
+            XCTAssertTrue(button.waitForExistence(timeout: 5), "Вкладка \(tab) отсутствует")
+            button.tap()
+        }
     }
+
+    /// Регрессия: экран трафика не создаёт собственный NavigationStack начиная с 2.0.0.
+    /// Без обёртки в приложении пропадали заголовок и вся панель инструментов.
+    func testTrafficScreenShowsItsNavigationBar() {
+        app.tabBars.buttons["Traffic"].tap()
+
+        XCTAssertTrue(
+            app.navigationBars["Network Traffic"].waitForExistence(timeout: 5),
+            "Заголовок экрана трафика не отображается — потерян NavigationStack"
+        )
+    }
+
+    /// Регрессия: два ToolbarItem с одинаковым placement схлопывались,
+    /// из-за чего правые кнопки пропадали или не реагировали.
+    func testTrafficToolbarActionsArePresentAndOpen() {
+        app.tabBars.buttons["Traffic"].tap()
+
+        let bar = app.navigationBars["Network Traffic"]
+        XCTAssertTrue(bar.waitForExistence(timeout: 5))
+
+        let menu = bar.buttons.element(boundBy: bar.buttons.count - 1)
+        XCTAssertTrue(menu.exists, "Кнопка меню действий отсутствует в панели")
+
+        menu.tap()
+
+        // Меню должно реально раскрыться, а не просто существовать
+        XCTAssertTrue(
+            app.buttons["Import HAR"].waitForExistence(timeout: 5),
+            "Меню действий не раскрылось"
+        )
+        XCTAssertTrue(app.buttons["Export HAR"].exists)
+        XCTAssertTrue(app.buttons["Statistics"].exists)
+    }
+
+    // MARK: - Условия сети
+
+    /// Троттлинг включается с главного экрана и отражается в баннере
+    func testThrottleQuickActionTogglesNetworkCondition() {
+        app.tabBars.buttons["Home"].tap()
+
+        let throttle = app.buttons["Throttle 3G"]
+        XCTAssertTrue(throttle.waitForExistence(timeout: 5), "Кнопка троттлинга отсутствует")
+        throttle.tap()
+
+        XCTAssertTrue(
+            app.staticTexts["Network: 3G"].waitForExistence(timeout: 5),
+            "Баннер активного профиля сети не появился"
+        )
+
+        app.buttons["Off"].tap()
+        XCTAssertFalse(app.staticTexts["Network: 3G"].waitForExistence(timeout: 2))
+    }
+
+    // MARK: - Запуск
 
     @MainActor
     func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
             XCUIApplication().launch()
         }

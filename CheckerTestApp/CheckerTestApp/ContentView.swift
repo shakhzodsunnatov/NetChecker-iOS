@@ -27,11 +27,15 @@ struct ContentView: View {
                 Label("API Test", systemImage: "arrow.up.arrow.down")
             }
 
-            // Traffic Inspector
-            TrafficListView()
-                .tabItem {
-                    Label("Traffic", systemImage: "network")
-                }
+            // Traffic Inspector.
+            // Начиная с 2.0.0 экран не создаёт собственный NavigationStack —
+            // без обёртки пропадают заголовок и панель инструментов
+            NavigationStack {
+                TrafficListView()
+            }
+            .tabItem {
+                Label("Traffic", systemImage: "network")
+            }
 
             // Mock Rules
             NavigationStack {
@@ -50,9 +54,29 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            TrafficInterceptor.shared.start()
+            startInterceptor()
             setupDemoEnvironments()
         }
+    }
+
+    /// Начиная с 2.0.0 перехват не стартует в Release без явного разрешения.
+    /// TestFlight собирается как Release, поэтому границу проводит флаг сборки,
+    /// а не `#if DEBUG`: с ним тестировщики получают инспектор, а сборка
+    /// в App Store остаётся нетронутой.
+    private func startInterceptor() {
+        var config = InterceptorConfiguration()
+
+        #if TESTFLIGHT
+        config.enableInRelease = true
+        #endif
+
+        // Демонстрационные лимиты: тела крупнее 512 КБ не сохраняются,
+        // записи живут десять минут
+        config.maxRecords = 300
+        config.maxBodySizeToCapture = 512 * 1024
+        config.retentionPeriod = 600
+
+        TrafficInterceptor.shared.start(configuration: config)
     }
 
     private func setupDemoEnvironments() {
@@ -95,6 +119,7 @@ struct HomeView: View {
     @ObservedObject private var trafficStore = TrafficStore.shared
     @ObservedObject private var mockEngine = MockEngine.shared
     @ObservedObject private var breakpointEngine = BreakpointEngine.shared
+    @ObservedObject private var conditioner = NetworkConditioner.shared
 
     var body: some View {
         ScrollView {
@@ -195,6 +220,28 @@ struct HomeView: View {
                         FeatureRow(icon: "globe", text: "Per-host configuration")
                         FeatureRow(icon: "key", text: "Environment variables")
                     }
+
+                    FeatureSection(
+                        title: "Network Conditions",
+                        description: "Simulate slow and unreliable connections",
+                        icon: "wifi.exclamationmark",
+                        color: .teal
+                    ) {
+                        FeatureRow(icon: "tortoise", text: "3G, EDGE and flaky-link profiles")
+                        FeatureRow(icon: "airplane", text: "Simulate no connectivity at all")
+                        FeatureRow(icon: "speedometer", text: "Latency, bandwidth and packet loss")
+                    }
+
+                    FeatureSection(
+                        title: "HAR Import",
+                        description: "Replay a recorded session offline",
+                        icon: "square.and.arrow.down",
+                        color: .indigo
+                    ) {
+                        FeatureRow(icon: "doc.badge.plus", text: "Load HAR from Chrome, Safari or Charles")
+                        FeatureRow(icon: "theatermasks", text: "Turn recorded responses into mocks")
+                        FeatureRow(icon: "wifi.slash", text: "Run the app against captured data")
+                    }
                 }
                 .padding(.horizontal)
 
@@ -237,9 +284,51 @@ struct HomeView: View {
                             ) {
                                 addQuickBreakpoint()
                             }
+
+                            QuickActionButton(
+                                title: conditioner.isEnabled ? "Full Speed" : "Throttle 3G",
+                                icon: conditioner.isEnabled ? "hare.circle.fill" : "tortoise.circle.fill",
+                                color: .teal
+                            ) {
+                                if conditioner.isEnabled {
+                                    conditioner.disable()
+                                } else {
+                                    conditioner.apply(.threeG)
+                                }
+                            }
+
+                            QuickActionButton(
+                                title: "Go Offline",
+                                icon: "airplane.circle.fill",
+                                color: .gray
+                            ) {
+                                conditioner.apply(.offline)
+                            }
                         }
                         .padding(.horizontal)
                     }
+                }
+
+                // Активный профиль сети виден сразу — иначе непонятно,
+                // почему запросы вдруг стали медленными или падают
+                if conditioner.isEnabled {
+                    HStack(spacing: 10) {
+                        Text(conditioner.activeProfile.emoji)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Network: \(conditioner.activeProfile.name)")
+                                .font(.subheadline.weight(.medium))
+                            Text(conditioner.activeProfile.summary)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        Button("Off") { conditioner.disable() }
+                            .font(.caption.weight(.semibold))
+                    }
+                    .padding()
+                    .background(Color.teal.opacity(0.12))
+                    .cornerRadius(12)
+                    .padding(.horizontal)
                 }
 
                 // Tips
