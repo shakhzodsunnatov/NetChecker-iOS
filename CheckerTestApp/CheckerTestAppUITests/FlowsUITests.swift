@@ -151,6 +151,104 @@ final class FlowsUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["В запрос"].exists, "Раздел подстановки не показан")
     }
 
+    // MARK: - Блоки
+
+    /// Демо-сценарий даёт три шага без обращения к сети
+    private func openDemoFlow() {
+        app.tabBars.buttons["Home"].tap()
+        let seed = app.buttons["Demo Flow"]
+        XCTAssertTrue(seed.waitForExistence(timeout: 10), "Кнопка демо-сценария отсутствует")
+        seed.tap()
+
+        app.tabBars.buttons["Flows"].tap()
+        let flow = app.staticTexts["JSONPlaceholder Demo"]
+        XCTAssertTrue(flow.waitForExistence(timeout: 5))
+        flow.tap()
+        XCTAssertTrue(app.buttons["Запустить"].waitForExistence(timeout: 5))
+    }
+
+    private func selectSteps(_ paths: [String]) {
+        app.buttons["netchecker.flowMenu"].tap()
+        app.buttons["Выбрать шаги"].tap()
+
+        for path in paths {
+            let node = app.staticTexts[path]
+            XCTAssertTrue(node.waitForExistence(timeout: 5), "Шаг \(path) не найден")
+            node.tap()
+        }
+    }
+
+    /// Ради этого блок и нужен: сложить шаги в контейнер,
+    /// а не вычищать зависимости по одной
+    func testSelectedStepsBecomeAParallelBlock() {
+        openDemoFlow()
+        selectSteps(["/posts/1", "/todos/1"])
+
+        XCTAssertTrue(app.staticTexts["Выбрано 2"].waitForExistence(timeout: 3), "Счётчик выбора не показан")
+
+        app.buttons["netchecker.groupSelection"].tap()
+        app.buttons["Одновременно"].firstMatch.tap()
+
+        let create = app.buttons["Создать"]
+        XCTAssertTrue(create.waitForExistence(timeout: 5), "Диалог названия блока не открылся")
+        create.tap()
+
+        XCTAssertTrue(
+            app.staticTexts["одновременно"].waitForExistence(timeout: 5),
+            "Рамка блока на полотне не появилась"
+        )
+    }
+
+    func testBlockCanBeSwitchedToSequence() {
+        openDemoFlow()
+        selectSteps(["/posts/1", "/todos/1"])
+
+        app.buttons["netchecker.groupSelection"].tap()
+        app.buttons["Одновременно"].firstMatch.tap()
+        app.buttons["Создать"].tap()
+
+        let header = app.buttons.matching(
+            NSPredicate(format: "identifier BEGINSWITH %@", "netchecker.flowGroup")
+        ).firstMatch
+        XCTAssertTrue(header.waitForExistence(timeout: 5), "Заголовок блока не найден")
+        header.tap()
+
+        XCTAssertTrue(app.staticTexts["Как выполняется"].waitForExistence(timeout: 5), "Редактор блока не открылся")
+        app.buttons["По очереди"].tap()
+        app.buttons["Готово"].tap()
+
+        XCTAssertTrue(
+            app.staticTexts["по очереди"].waitForExistence(timeout: 5),
+            "Режим блока не сменился на полотне"
+        )
+    }
+
+    /// Пакетное удаление: по одному шагу это слишком долго
+    func testSelectedStepsAreDeletedTogether() {
+        openDemoFlow()
+        selectSteps(["/posts/1", "/todos/1"])
+
+        app.buttons["netchecker.deleteSelection"].tap()
+
+        XCTAssertTrue(
+            app.staticTexts["/users/{userId}"].waitForExistence(timeout: 5),
+            "Оставшийся шаг пропал"
+        )
+        XCTAssertFalse(app.staticTexts["/todos/1"].exists, "Удалённый шаг остался на полотне")
+    }
+
+    func testFullScreenHidesTheRunBarAndTabs() {
+        openDemoFlow()
+
+        app.buttons["netchecker.flowFullScreen"].tap()
+
+        XCTAssertFalse(
+            app.tabBars.buttons["Flows"].waitForExistence(timeout: 2),
+            "Панель вкладок осталась в полноэкранном режиме"
+        )
+        XCTAssertTrue(app.buttons["Запустить"].exists, "Запуск должен остаться доступным")
+    }
+
     func testStepPickerNumbersSelectionInOrder() {
         makeTraffic()
         createFlow(named: "Checkout")
