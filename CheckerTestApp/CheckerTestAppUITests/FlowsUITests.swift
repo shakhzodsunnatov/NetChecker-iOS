@@ -40,7 +40,11 @@ final class FlowsUITests: XCTestCase {
 
     private func createFlow(named name: String) {
         app.tabBars.buttons["Flows"].tap()
-        app.navigationBars["Flows"].buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(app.navigationBars["Flows"].waitForExistence(timeout: 5), "Вкладка Flows не открылась")
+
+        let add = app.buttons["netchecker.addFlow"]
+        XCTAssertTrue(add.waitForExistence(timeout: 5), "Кнопка создания отсутствует")
+        add.tap()
 
         let field = app.textFields.element(boundBy: 0)
         XCTAssertTrue(field.waitForExistence(timeout: 5), "Поле имени сценария не появилось")
@@ -48,7 +52,14 @@ final class FlowsUITests: XCTestCase {
         XCTAssertTrue(app.keyboards.element.waitForExistence(timeout: 5), "Клавиатура не появилась")
         field.typeText(name)
 
-        app.buttons["Создать"].tap()
+        let create = app.buttons["Создать"]
+        XCTAssertTrue(create.waitForExistence(timeout: 5))
+        create.tap()
+
+        XCTAssertTrue(
+            app.staticTexts[name].waitForExistence(timeout: 5),
+            "Сценарий «\(name)» не появился в списке"
+        )
     }
 
     // MARK: - Список
@@ -104,6 +115,41 @@ final class FlowsUITests: XCTestCase {
     }
 
     // MARK: - Добавление шагов
+
+    // MARK: - Редактор шага
+
+    /// Из интерфейса должны настраиваться зависимости и передача значений,
+    /// иначе параллель и развилки задаются только кодом
+    func testStepEditorIsReachableAndShowsDependencies() {
+        makeTraffic()
+        createFlow(named: "Checkout")
+        app.staticTexts["Checkout"].tap()
+
+        app.buttons["Добавить шаги"].tap()
+        let firstRow = app.cells.element(boundBy: 0)
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 10))
+        firstRow.tap()
+        app.cells.element(boundBy: 1).tap()
+        app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Добавить (")).firstMatch.tap()
+
+        // Открываем второй шаг — у него есть предшественник
+        let secondNode = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS %@", "/posts")
+        ).element(boundBy: 1)
+        XCTAssertTrue(secondNode.waitForExistence(timeout: 5))
+        secondNode.tap()
+
+        let configure = app.buttons["Настроить шаг"]
+        XCTAssertTrue(configure.waitForExistence(timeout: 5), "Переход в редактор шага отсутствует")
+        configure.tap()
+
+        XCTAssertTrue(
+            app.staticTexts["Ждать завершения"].waitForExistence(timeout: 5),
+            "Раздел зависимостей не показан"
+        )
+        XCTAssertTrue(app.staticTexts["Из ответа"].exists, "Раздел извлечения значений не показан")
+        XCTAssertTrue(app.staticTexts["В запрос"].exists, "Раздел подстановки не показан")
+    }
 
     func testStepPickerNumbersSelectionInOrder() {
         makeTraffic()
