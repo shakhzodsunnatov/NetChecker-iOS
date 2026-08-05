@@ -37,20 +37,21 @@ struct ContentView: View {
                 Label("Traffic", systemImage: "network")
             }
 
-            // Mock Rules
+            // API Flows — сценарии из связанных запросов
             NavigationStack {
-                MockDemoView()
+                FlowListView()
             }
             .tabItem {
-                Label("Mocks", systemImage: "theatermasks")
+                Label("Flows", systemImage: "point.3.connected.trianglepath.dotted")
             }
 
-            // Breakpoints
+            // Моки и брейкпоинты вместе: TabView на iOS показывает пять вкладок,
+            // шестая уехала бы в «More» и перестала быть доступной напрямую
             NavigationStack {
-                BreakpointDemoView()
+                RulesDemoView()
             }
             .tabItem {
-                Label("Breakpoints", systemImage: "hand.raised")
+                Label("Rules", systemImage: "slider.horizontal.3")
             }
         }
         .onAppear {
@@ -109,6 +110,36 @@ struct ContentView: View {
             ]
         )
         store.addGroup(apiGroup)
+    }
+}
+
+// MARK: - Rules Demo
+
+/// Моки и брейкпоинты на одном экране с переключателем
+struct RulesDemoView: View {
+    private enum Section: String, CaseIterable {
+        case mocks = "Mocks"
+        case breakpoints = "Breakpoints"
+    }
+
+    @State private var section: Section = .mocks
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Picker("Раздел", selection: $section) {
+                ForEach(Section.allCases, id: \.self) { item in
+                    Text(item.rawValue).tag(item)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+
+            switch section {
+            case .mocks: MockDemoView()
+            case .breakpoints: BreakpointDemoView()
+            }
+        }
     }
 }
 

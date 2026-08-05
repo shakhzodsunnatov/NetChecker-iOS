@@ -24,7 +24,7 @@ final class CheckerTestAppUITests: XCTestCase {
     // MARK: - Вкладки
 
     func testAllTabsAreReachable() {
-        for tab in ["Home", "API Test", "Traffic", "Mocks", "Breakpoints"] {
+        for tab in ["Home", "API Test", "Traffic", "Flows", "Rules"] {
             let button = app.tabBars.buttons[tab]
             XCTAssertTrue(button.waitForExistence(timeout: 5), "Вкладка \(tab) отсутствует")
             button.tap()
