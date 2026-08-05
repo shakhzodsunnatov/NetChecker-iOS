@@ -335,6 +335,14 @@ struct HomeView: View {
                             ) {
                                 conditioner.apply(.offline)
                             }
+
+                            QuickActionButton(
+                                title: "Demo Flow",
+                                icon: "point.3.connected.trianglepath.dotted",
+                                color: .indigo
+                            ) {
+                                addDemoFlow()
+                            }
                         }
                         .padding(.horizontal)
                     }
@@ -399,6 +407,39 @@ struct HomeView: View {
         )
         mockEngine.addRule(rule)
         mockEngine.isEnabled = true
+    }
+
+    /// Готовый сценарий на JSONPlaceholder, показывающий все три механики:
+    /// передачу значения между шагами, параллельный триггер и проверку статуса.
+    ///
+    /// Шаг 1 достаёт `userId` из поста, шаг 3 подставляет его в путь.
+    /// Шаг 2 стартует одновременно с первым, и его никто не ждёт.
+    private func addDemoFlow() {
+        let host = "https://jsonplaceholder.typicode.com"
+
+        let post = FlowStep(
+            name: "GET /posts/1",
+            request: RequestData(url: URL(string: "\(host)/posts/1")!, method: .get),
+            outputs: [FlowOutput(name: "userId", source: .jsonPath("userId"))],
+            expectedStatusCode: 200
+        )
+
+        let trigger = FlowStep(
+            name: "GET /todos/1",
+            request: RequestData(url: URL(string: "\(host)/todos/1")!, method: .get)
+        )
+
+        let user = FlowStep(
+            name: "GET /users/{userId}",
+            request: RequestData(url: URL(string: "\(host)/users/%7BuserId%7D")!, method: .get),
+            dependsOn: [post.id],
+            inputs: [FlowInput(name: "userId", target: .pathPlaceholder("userId"))],
+            expectedStatusCode: 200
+        )
+
+        FlowStore.shared.add(
+            Flow(name: "JSONPlaceholder Demo", steps: [post, trigger, user])
+        )
     }
 
     private func addQuickBreakpoint() {
