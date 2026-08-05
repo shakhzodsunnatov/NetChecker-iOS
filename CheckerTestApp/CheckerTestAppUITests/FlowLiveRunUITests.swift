@@ -89,4 +89,68 @@ final class FlowLiveRunUITests: XCTestCase {
             "Имя переданного значения не показано"
         )
     }
+
+    /// Главный способ связать шаги — протянуть провод от кружка под шагом
+    /// к другому шагу. Экран связывания должен открыться на нужной паре
+    /// и показать настоящие поля ответа
+    func testDraggingWireOpensConnectScreenForThatPair() {
+        seedDemoFlowAndOpenIt()
+
+        app.buttons["Запустить"].tap()
+        let succeeded = app.staticTexts.matching(
+            NSPredicate(format: "label BEGINSWITH %@", "200")
+        ).firstMatch
+        XCTAssertTrue(succeeded.waitForExistence(timeout: 45), "Прогон не завершился")
+
+        let outlet = app.descendants(matching: .any)["netchecker.flowOutlet.2"]
+        XCTAssertTrue(outlet.waitForExistence(timeout: 10), "Кружок связи у второго шага отсутствует")
+
+        let target = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS %@", "/users/")
+        ).firstMatch
+        XCTAssertTrue(target.waitForExistence(timeout: 5))
+
+        outlet.press(forDuration: 0.15, thenDragTo: target)
+
+        XCTAssertTrue(
+            app.staticTexts["Нажмите значение из ответа"].waitForExistence(timeout: 10),
+            "Экран связывания не открылся после броска провода"
+        )
+        // Поля берутся из настоящего ответа второго шага, а не вводятся руками
+        XCTAssertTrue(app.staticTexts["completed"].exists, "Поля ответа не показаны")
+    }
+
+    /// Связь создаётся двумя нажатиями и сразу становится видимой
+    func testConnectingValueCreatesLinkInOneAction() {
+        seedDemoFlowAndOpenIt()
+
+        app.buttons["Запустить"].tap()
+        let succeeded = app.staticTexts.matching(
+            NSPredicate(format: "label BEGINSWITH %@", "200")
+        ).firstMatch
+        XCTAssertTrue(succeeded.waitForExistence(timeout: 45), "Прогон не завершился")
+
+        let outlet = app.descendants(matching: .any)["netchecker.flowOutlet.2"]
+        XCTAssertTrue(outlet.waitForExistence(timeout: 10))
+
+        let target = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS %@", "/users/")
+        ).firstMatch
+        outlet.press(forDuration: 0.15, thenDragTo: target)
+
+        XCTAssertTrue(app.staticTexts["title"].waitForExistence(timeout: 10), "Поле ответа не найдено")
+        app.staticTexts["title"].tap()
+
+        XCTAssertTrue(
+            app.staticTexts["Теперь выберите, куда его положить"].waitForExistence(timeout: 5),
+            "Подсказка не сменилась после выбора значения"
+        )
+
+        app.staticTexts["новый заголовок"].firstMatch.tap()
+
+        XCTAssertTrue(
+            app.staticTexts["УЖЕ СВЯЗАНО"].waitForExistence(timeout: 5),
+            "Созданная связь не показана"
+        )
+    }
 }
